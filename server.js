@@ -108,6 +108,8 @@ io.on('connection', (socket) =>{
 		socket.emit("JOIN_SUCCESS",currentUser.id,currentUser.name,currentUser.posX,currentUser.posY,currentUser.posZ,data.model,data.hair,data.bear,data.pants,data.tshirt,data.glasses,data.shoes,data.skin_color,data.hair_color,
 		data.bear_color,data.pants_color,data.tshirt_color,data.glasses_color,data.shoes_color);
 		
+		/*
+		
          //spawn all connected clients for currentUser client 
          clients.forEach( function(i) {
 		    if(i.id!=currentUser.id)
@@ -124,6 +126,7 @@ io.on('connection', (socket) =>{
 		 // spawn currentUser client on clients in broadcast
 		socket.broadcast.emit('SPAWN_PLAYER',currentUser.id,currentUser.name,currentUser.posX,currentUser.posY,currentUser.posZ,data.model,data.hair,data.bear,data.pants,data.tshirt,data.glasses,data.shoes,data.skin_color,data.hair_color,
 		data.bear_color,data.pants_color,data.tshirt_color,data.glasses_color,data.shoes_color);
+		*/
 		
   
 	});//END_SOCKET_ON
