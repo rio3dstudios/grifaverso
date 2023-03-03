@@ -16,6 +16,7 @@ app.use(express.static(__dirname+'/public'));
 var clients			= [];// to storage clients
 var clientLookup = {};// clients search engine
 var sockets = {};//// to storage sockets
+var deadline = new Date("mar 9, 2023 08:40:00").getTime();
 
 function getDistance(x1, y1, x2, y2){
     let y = x2 - x1;
@@ -499,6 +500,42 @@ if(currentUser)
 //END_IO.ON
 
 })
+
+
+function sendUpdates() {
+	
+	var now = new Date().getTime();
+	var t = deadline - now;
+	var days = Math.floor(t/(1000*60*60*24));
+	var hours = Math.floor((t%(1000*60*60*24))/(1000*60*60));
+	var minutes = Math.floor((t%(1000*60*60))/(1000*60));
+	var seconds = Math.floor((t%(1000*60))/1000);
+	
+	//console.log("days: "+days);
+	//console.log("hours: "+hours);
+	//console.log("minutes: "+minutes);
+	//console.log("seconds: "+seconds);
+
+    // for each game client make the necessary updates
+    clients.forEach( function(u) {
+       
+	   if(sockets[u.id])
+	   {
+        
+		sockets[u.id].emit('UPDATE_DATE',days, hours, minutes,seconds);// emit to client u.socketID
+       
+		
+		}
+ 
+    });
+	    
+		
+    leaderboardChanged = false;
+	
+}//END_SEND_UPDATES
+
+setInterval(sendUpdates, 1000);//run the send updates function every 1 seconds
+
 
 http.listen(process.env.PORT ||3000, function(){
 	console.log('listening on *:3000');
