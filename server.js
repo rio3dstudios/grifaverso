@@ -4,10 +4,6 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-//enable cpus node clustering
-const cluster = require('node:cluster');
-const totalCPUs = require('node:os').cpus().length;
-const process = require('node:process');
 
 
 
@@ -501,7 +497,7 @@ if(currentUser)
 
 })
 
-var server = http.listen(3000, () => {
-  console.log('server is running on port', server.address().port);
+http.listen(process.env.PORT ||3000, function(){
+	console.log('listening on *:3000');
 });
 console.log("------- server is running -------");
