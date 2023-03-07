@@ -13,6 +13,7 @@ app.use(express.static(__dirname+'/public'));
 
 
 
+
 var clients			= [];// to storage clients
 var clientLookup = {};// clients search engine
 var sockets = {};//// to storage sockets
